@@ -6,7 +6,7 @@ function RandomList() {
   for (let i = 1; i < 50; i++) numbers49.push(i);
 
   const [sixnumbers, setSixnumbers] = useState(new Array(6).fill(0));
-  const [tzoker, setTzoker] = useState(0);
+  const [tzoker, setTzoker] = useState([0]);
 
   const handleGenerate = () => {
     const oldNumbers = [];
@@ -25,6 +25,11 @@ function RandomList() {
     setTzoker(Math.ceil(Math.random() * 10));
   };
 
+  const resetHandler = () => {
+    setSixnumbers([]);
+    setTzoker([]);
+  };
+
   return (
     <div>
       <div className="flex gap-5">
@@ -35,14 +40,16 @@ function RandomList() {
             </p>
           </div>
         ))}
-        <div className=" bg-gray-200 my-5 flex items-center justify-center bg-transparent text-blue-700 font-semibold border border-blue-500 rounded-full p-4">
-          <p className="w-[20px] h-[20px] text-center">{tzoker}</p>
-        </div>
+        {tzoker.length !== 0 && (
+          <div className=" bg-gray-200 my-5 flex items-center justify-center bg-transparent text-blue-700 font-semibold border border-blue-500 rounded-full p-4">
+            <p className="w-[20px] h-[20px] text-center">{tzoker}</p>
+          </div>
+        )}
       </div>
-      <div className="flex gap-[10px]">
+      <div className="flex gap-[10px] mt-3">
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
-          onClick={() => setSixnumbers([])}
+          onClick={resetHandler}
         >
           Reset
         </button>
